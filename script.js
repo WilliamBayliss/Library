@@ -1,5 +1,11 @@
-let libraryContainer = document.getElementById('library-container');
-let newBoookButton = document.getElementById('new-book-button')
+const libraryContainer = document.getElementById('library-container');
+const newBookButton = document.getElementById('new-book-button');
+const newBookForm = document.getElementById('new-book-form')
+
+newBookButton.addEventListener('click', function(event) {
+    newBookForm.classList.toggle('hidden-form');
+});
+
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
