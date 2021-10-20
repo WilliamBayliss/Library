@@ -38,17 +38,33 @@ function addBookToLibrary(book) {
 function displayLibrary() {
     for (let i = 0; i < myLibrary.length; i++) {
         let book = myLibrary[i]
-        let bookDisplay = document.createElement('div');
-        bookDisplay.innerHTML = book.title;
-
-        libraryContainer.appendChild(bookDisplay);
-
+        displayBook(book)
 
     };
 };
 
 // Will create an HTML element for a Book object and append it to the libraryContainer
 function displayBook(book) {
+    // Create div
+    let bookDisplay = document.createElement('div');
+    bookDisplay.classList.toggle("book-box")
+    
+    // Create h3 for title, set inner HTML and append to div
+    let bookTitle = document.createElement('h3');
+    bookTitle.innerHTML = book.title;
+    bookDisplay.appendChild(bookTitle)
+
+    // Create p for book author, set inner HTML and append to div
+    let bookAuthor = document.createElement('p');
+    bookAuthor.innerHTML = "by " + book.author;
+    bookDisplay.appendChild(bookAuthor)
+
+    // Create p for page count, set inner HTML and append to div
+    let pageCount = document.createElement('p');
+    pageCount.innerHTML = "" + book.pages + " pages.";
+    bookDisplay.appendChild(pageCount)
+
+    libraryContainer.appendChild(bookDisplay);
 
 }
 
