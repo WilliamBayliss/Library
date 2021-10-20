@@ -1,5 +1,5 @@
 let libraryContainer = document.getElementById('library-container');
-
+let newBoookButton = document.getElementById('new-book-button')
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -35,7 +35,11 @@ function displayLibrary() {
     };
 };
 
+function displayBook(book) {
+
+}
+
 let book = new Book("The Lord of the Rings", "JRR Tolkein", 455, true);
 addBookToLibrary(book);
-console.log(book.info())
+console.log(book.info());
 displayLibrary();
