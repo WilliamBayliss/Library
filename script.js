@@ -40,17 +40,28 @@ function Book(title, author, pages, read) {
     };
 };
 
+// Called when the new book form is submitted
 function formEvent(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevents page from refreshing
+    // Gets values from inputs and creates new book object
     book = new Book(
         newBookTitle.value,
         newBookAuthor.value,
         newBookPages.value,
         newBookRead.value
     );
+    // Add to library and refresh display
     addBookToLibrary(book);
     refreshLibraryDisplay();
+    clearFormInputs();
 };
+
+function clearFormInputs() {
+    newBookTitle.value = ""
+    newBookAuthor.value = ""
+    newBookPages.vlaue = ""
+    newBookRead.value = ""
+}
 
 // Takes a book and adds it to the myLibrary array
 function addBookToLibrary(book) {
@@ -66,12 +77,14 @@ function displayLibrary() {
     };
 };
 
+// As long as the library disply has a first child, deletes the last child of the display
 function emptyLibraryDisplay() {
     while (libraryContainer.firstChild) {
         libraryContainer.removeChild(libraryContainer.lastChild);
     }
 }
 
+// Refreshes the Library display to prevent duplicates when a new book is added
 function refreshLibraryDisplay() {
     emptyLibraryDisplay();
     displayLibrary();
@@ -103,6 +116,9 @@ function displayBook(book, index) {
     bookDisplay.appendChild(deleteButton);
 
     libraryContainer.appendChild(bookDisplay);
+}
+
+function deleteBook() {
 
 }
 
