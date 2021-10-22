@@ -1,7 +1,44 @@
+html {
+    background-color: chocolate;
+}
+
+.button {
+    margin: 10px;
+    padding: 10px;
+    background-color: lightgray;
+}
+
+input {
+    margin: 1em;
+}
+
+#library-container {
+    display: flex;
+    flex-direction: row;
+}
+
+
+
 .book-box {
+    background-color: beige;
+    margin: 10px;
+    padding: 10px;
     border: 1px black solid;
+    overflow-wrap: break-word;
+    max-width: 20em;
+}
+
+#new-book-form-container {
+    margin: 25px;
+    padding: 25px;
+    background-color: beige;
+    max-width: 25em;
 }
 
 .hidden-form {
     display: none;
+}
+
+.delete-button {
+    
 }
