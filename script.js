@@ -96,34 +96,26 @@ function displayBook(book, index) {
     let bookDisplay = document.createElement('div');
     bookDisplay.classList.toggle("book-box");
     
-    // Create h3 for title, set inner HTML and append to div
-    let bookTitle = document.createElement('h3');
-    bookTitle.innerHTML = book.title;
-    bookDisplay.appendChild(bookTitle);
+    // Create header for book info, set inner HTML and append to div
+    let bookInfo = document.createElement('h5');
+    bookInfo.innerHTML = book.info();
+    bookDisplay.appendChild(bookInfo);
 
-    // Create p for book author, set inner HTML and append to div
-    let bookAuthor = document.createElement('p');
-    bookAuthor.innerHTML = "by " + book.author;
-    bookDisplay.appendChild(bookAuthor);
-
-    // Create p for page count, set inner HTML and append to div
-    let pageCount = document.createElement('p');
-    pageCount.innerHTML = "" + book.pages + " pages.";
-    bookDisplay.appendChild(pageCount);
-
+    // Create delete button, set inner HTML, add button class and append to bookDisplay Div
     let deleteButton = document.createElement('button');
     deleteButton.innerHTML = "Delete Book"
     deleteButton.classList.add("button")
     bookDisplay.appendChild(deleteButton);
 
+    // Add event listener to delete book on button press
+    deleteButton.addEventListener('click', function(event) {
+        deleteBook();
+    });
+
     libraryContainer.appendChild(bookDisplay);
 }
 
 function deleteBook() {
-
+    console.log('test');
 }
-
-let book = new Book("The Lord of the Rings", "JRR Tolkein", 455, true);
-addBookToLibrary(book);
-console.log(book.info());
 displayLibrary();
