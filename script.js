@@ -1,11 +1,22 @@
 // HTML Elements / Document selectors
 const libraryContainer = document.getElementById('library-container');
 const newBookButton = document.getElementById('new-book-button');
-const newBookForm = document.getElementById('new-book-form')
+const newBookFormContainer = document.getElementById('new-book-form-container');
+const newBookForm = document.getElementById('new-book-form');
+const newBookTitle = document.getElementById('title-input');
+const newBookAuthor = document.getElementById('author-input');
+const newBookPages = document.getElementById('pages-input');
+const newBookRead = document.getElementById('read-checkbox');
+
+
+
+
+
+newBookForm.addEventListener('submit', formEvent);
 
 // Toggles display of the new book form in HTML
 newBookButton.addEventListener('click', function(event) {
-    newBookForm.classList.toggle('hidden-form');
+    newBookFormContainer.classList.toggle('hidden-form');
 });
 
 // Array of Book objects
@@ -29,6 +40,18 @@ function Book(title, author, pages, read) {
     };
 };
 
+function formEvent(event) {
+    event.preventDefault();
+    book = new Book(
+        newBookTitle.value,
+        newBookAuthor.value,
+        newBookPages.value,
+        newBookRead.value
+    );
+    addBookToLibrary(book);
+    displayLibrary();
+};
+
 // Takes a book and adds it to the myLibrary array
 function addBookToLibrary(book) {
     myLibrary.push(book);
@@ -38,31 +61,35 @@ function addBookToLibrary(book) {
 function displayLibrary() {
     for (let i = 0; i < myLibrary.length; i++) {
         let book = myLibrary[i]
-        displayBook(book)
+        displayBook(book, i)
 
     };
 };
 
 // Will create an HTML element for a Book object and append it to the libraryContainer
-function displayBook(book) {
+function displayBook(book, index) {
     // Create div
     let bookDisplay = document.createElement('div');
-    bookDisplay.classList.toggle("book-box")
+    bookDisplay.classList.toggle("book-box");
     
     // Create h3 for title, set inner HTML and append to div
     let bookTitle = document.createElement('h3');
     bookTitle.innerHTML = book.title;
-    bookDisplay.appendChild(bookTitle)
+    bookDisplay.appendChild(bookTitle);
 
     // Create p for book author, set inner HTML and append to div
     let bookAuthor = document.createElement('p');
     bookAuthor.innerHTML = "by " + book.author;
-    bookDisplay.appendChild(bookAuthor)
+    bookDisplay.appendChild(bookAuthor);
 
     // Create p for page count, set inner HTML and append to div
     let pageCount = document.createElement('p');
     pageCount.innerHTML = "" + book.pages + " pages.";
-    bookDisplay.appendChild(pageCount)
+    bookDisplay.appendChild(pageCount);
+
+    let deleteButton = document.createElement('button');
+    deleteButton.innerHTML = "Delete Book"
+    bookDisplay.appendChild(deleteButton);
 
     libraryContainer.appendChild(bookDisplay);
 
