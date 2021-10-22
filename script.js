@@ -113,6 +113,7 @@ function displayBook(book, index) {
 
     let deleteButton = document.createElement('button');
     deleteButton.innerHTML = "Delete Book"
+    deleteButton.classList.add("button")
     bookDisplay.appendChild(deleteButton);
 
     libraryContainer.appendChild(bookDisplay);
