@@ -24,6 +24,7 @@ let myLibrary = [];
 
 // Object constructor for Books
 function Book(title, author, pages, read) {
+    this.id;
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -38,6 +39,10 @@ function Book(title, author, pages, read) {
             return `${title}, ${author}, ${pages} pages. You have not read this book`;
         }
     };
+
+    this.setID = function(id) {
+        this.id = id;
+    }
 };
 
 // Called when the new book form is submitted
@@ -72,6 +77,7 @@ function addBookToLibrary(book) {
 function displayLibrary() {
     for (let i = 0; i < myLibrary.length; i++) {
         let book = myLibrary[i]
+        book.setID(i)
         displayBook(book, i)
 
     };
@@ -91,7 +97,7 @@ function refreshLibraryDisplay() {
 }
 
 // Will create an HTML element for a Book object and append it to the libraryContainer
-function displayBook(book, index) {
+function displayBook(book) {
     // Create div
     let bookDisplay = document.createElement('div');
     bookDisplay.classList.toggle("book-box");
@@ -109,13 +115,14 @@ function displayBook(book, index) {
 
     // Add event listener to delete book on button press
     deleteButton.addEventListener('click', function(event) {
-        deleteBook();
+        deleteBook(book);
     });
 
     libraryContainer.appendChild(bookDisplay);
 }
 
-function deleteBook() {
-    console.log('test');
+function deleteBook(book) {
+    myLibrary.splice(book.id, 1)
+    refreshLibraryDisplay();
 }
 displayLibrary();
