@@ -62,10 +62,7 @@ function formEvent(event) {
 };
 
 function clearFormInputs() {
-    newBookTitle.value = ""
-    newBookAuthor.value = ""
-    newBookPages.value = ""
-    newBookRead.value = ""
+    newBookForm.reset();
 }
 
 // Takes a book and adds it to the myLibrary array
