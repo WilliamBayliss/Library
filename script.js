@@ -64,7 +64,7 @@ function formEvent(event) {
 function clearFormInputs() {
     newBookTitle.value = ""
     newBookAuthor.value = ""
-    newBookPages.vlaue = ""
+    newBookPages.value = ""
     newBookRead.value = ""
 }
 
