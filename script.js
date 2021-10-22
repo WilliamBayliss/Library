@@ -6,7 +6,6 @@ const newBookForm = document.getElementById('new-book-form');
 const newBookTitle = document.getElementById('title-input');
 const newBookAuthor = document.getElementById('author-input');
 const newBookPages = document.getElementById('pages-input');
-const newBookRead = document.getElementById('read-checkbox');
 
 
 
@@ -23,26 +22,30 @@ newBookButton.addEventListener('click', function(event) {
 let myLibrary = [];
 
 // Object constructor for Books
-function Book(title, author, pages, read) {
+function Book(title, author, pages) {
     this.id;
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.read = read;
+    this.read = false;
 
     // Will return a string with the properties of the book
     this.info = function() {
-        if (read == true) {
+        if (this.read == true) {
             return `${title}, ${author}, ${pages} pages. You have read this book`;
         }
-        else {
+        else if (this.read == false) {
             return `${title}, ${author}, ${pages} pages. You have not read this book`;
         }
     };
 
     this.setID = function(id) {
         this.id = id;
-    }
+    };
+
+    this.markRead = function() {
+        this.read = true;
+    };
 };
 
 // Called when the new book form is submitted
@@ -52,18 +55,13 @@ function formEvent(event) {
     book = new Book(
         newBookTitle.value,
         newBookAuthor.value,
-        newBookPages.value,
-        newBookRead.value
+        newBookPages.value
     );
     // Add to library and refresh display
     addBookToLibrary(book);
     refreshLibraryDisplay();
-    clearFormInputs();
-};
-
-function clearFormInputs() {
     newBookForm.reset();
-}
+};
 
 // Takes a book and adds it to the myLibrary array
 function addBookToLibrary(book) {
@@ -73,9 +71,9 @@ function addBookToLibrary(book) {
 // For each book will call the displayBook function
 function displayLibrary() {
     for (let i = 0; i < myLibrary.length; i++) {
-        let book = myLibrary[i]
-        book.setID(i)
-        displayBook(book, i)
+        let book = myLibrary[i];
+        book.setID(i);
+        displayBook(book, i);
 
     };
 };
@@ -84,14 +82,14 @@ function displayLibrary() {
 function emptyLibraryDisplay() {
     while (libraryContainer.firstChild) {
         libraryContainer.removeChild(libraryContainer.lastChild);
-    }
-}
+    };
+};
 
 // Refreshes the Library display to prevent duplicates when a new book is added
 function refreshLibraryDisplay() {
     emptyLibraryDisplay();
     displayLibrary();
-}
+};
 
 // Will create an HTML element for a Book object and append it to the libraryContainer
 function displayBook(book) {
@@ -106,8 +104,8 @@ function displayBook(book) {
 
     // Create delete button, set inner HTML, add button class and append to bookDisplay Div
     let deleteButton = document.createElement('button');
-    deleteButton.innerHTML = "Delete Book"
-    deleteButton.classList.add("button")
+    deleteButton.innerHTML = 'Delete Book';
+    deleteButton.classList.add('button');
     bookDisplay.appendChild(deleteButton);
 
     // Add event listener to delete book on button press
@@ -115,11 +113,27 @@ function displayBook(book) {
         deleteBook(book);
     });
 
+    if (book.read == false) {
+        let markReadButton = document.createElement('button');
+        markReadButton.innerHTML = 'Mark book as Read';
+        markReadButton.classList.add('button');
+        bookDisplay.appendChild(markReadButton);
+        markReadButton.addEventListener('click', function(event) {
+            markBookRead(book);
+            refreshLibraryDisplay();
+        });
+    }
+
     libraryContainer.appendChild(bookDisplay);
 }
 
 function deleteBook(book) {
-    myLibrary.splice(book.id, 1)
+    myLibrary.splice(book.id, 1);
     refreshLibraryDisplay();
+}
+
+function markBookRead(book) {
+    book.markRead();
+    console.log(book.read)
 }
 displayLibrary();
