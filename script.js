@@ -49,7 +49,7 @@ function formEvent(event) {
         newBookRead.value
     );
     addBookToLibrary(book);
-    displayLibrary();
+    refreshLibraryDisplay();
 };
 
 // Takes a book and adds it to the myLibrary array
@@ -65,6 +65,17 @@ function displayLibrary() {
 
     };
 };
+
+function emptyLibraryDisplay() {
+    while (libraryContainer.firstChild) {
+        libraryContainer.removeChild(libraryContainer.lastChild);
+    }
+}
+
+function refreshLibraryDisplay() {
+    emptyLibraryDisplay();
+    displayLibrary();
+}
 
 // Will create an HTML element for a Book object and append it to the libraryContainer
 function displayBook(book, index) {
