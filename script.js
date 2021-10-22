@@ -98,7 +98,7 @@ function displayBook(book, index) {
     
     // Create header for book info, set inner HTML and append to div
     let bookInfo = document.createElement('h5');
-    bookInfo.innerHTML = book.info();
+    bookInfo.innerHTML = "📖" + book.info();
     bookDisplay.appendChild(bookInfo);
 
     // Create delete button, set inner HTML, add button class and append to bookDisplay Div
